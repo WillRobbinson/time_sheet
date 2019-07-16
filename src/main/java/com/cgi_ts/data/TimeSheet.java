@@ -15,7 +15,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
+/**
+ * This class implements a data object of the timesheet.
+ * Although not required, this class also implements an employee name to support configuration and debugging of 
+ * use cases. 
+ */
 @Entity
 @Table(name="TIMESHEET")
 public class TimeSheet {

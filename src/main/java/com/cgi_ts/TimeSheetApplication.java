@@ -9,9 +9,9 @@ public class TimeSheetApplication {
 	private static final Logger logger = Logger.getLogger(TimeSheetApplication.class);
 
 	public static void main(String[] args) {
-		logger.info("Starting TimeSheet Application");
+		logger.debug("Starting TimeSheet Application");
 		SpringApplication.run(TimeSheetApplication.class, args);
-		logger.info("after run");
+		logger.debug("after run");
 	}
 
 }

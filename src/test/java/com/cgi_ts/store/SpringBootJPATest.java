@@ -19,6 +19,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.cgi_ts.data.TimeSheet;
 import com.cgi_ts.data.TimeSheetDay;
 
+/**
+ * These tests are applied to the persistence layer.
+ * The database is initially seeded with a few objects to support these cases through the data.sql file.
+ * The database schema is implemented through the schema.sql file.
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class SpringBootJPATest {
@@ -27,6 +33,9 @@ public class SpringBootJPATest {
     @Autowired
     private TimeSheetRepository timeSheetRepository;
  
+    /**
+     * Verify seeded rows.
+     */
     @Test
     public void findAllTimeSheets() {
         List<TimeSheet> timeSheets = 
@@ -41,6 +50,9 @@ public class SpringBootJPATest {
         }
     }
     
+    /**
+     * Verify timesheet creation and timesheet day updates.
+     */
     @Test
     public void createUpdateEmployeeTimeSheet() {
     	TimeSheet newTimeSheet = new TimeSheet();
@@ -69,6 +81,9 @@ public class SpringBootJPATest {
     	assertTrue(tsd.getMinutes() == 30);    	
     }
     
+    /**
+     * Verify submission updates. 
+     */
     @Test
     public void testSubmitTimeSheet() {
     	TimeSheet newTimeSheet = new TimeSheet();
@@ -83,6 +98,9 @@ public class SpringBootJPATest {
 		assertTrue(ts.isSubmitted());
     }
     
+    /**
+     * Although note required, verify deletion.
+     */
     @Test
     public void testDeleteTimeSheet() {
     	Optional<TimeSheet> ts = timeSheetRepository.findById(1L);

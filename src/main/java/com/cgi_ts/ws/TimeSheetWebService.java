@@ -22,7 +22,16 @@ import com.cgi_ts.ws.exception.TimeSheetIndexOutOfRangeException;
 import com.cgi_ts.ws.exception.TimesheetNotFoundException;
 
 /**
- * This REST web service provide limited and specific access to a TimeSheet repository.
+ * This REST web service provides limited and specific access to a TimeSheet repository.
+ * A web user is allowed to:
+ * 1. Get a specific timesheet by its sheet id.
+ * 2. Get all timesheets.
+ * 3. Create a timesheet by providing a timestamp begin date.
+ * 4. Update a specific timesheet by its sheet id and day index with an amount of time.
+ * 5. Submit a timesheet by its sheet id.
+ * 
+ * Notes:
+ * 1. The timesheet data is not save from one web server startup to the next due to the default configuration of the database (H2) being used.
  */
 @RestController
 @RequestMapping("/api/timesheet")

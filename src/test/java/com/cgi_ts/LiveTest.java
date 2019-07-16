@@ -21,6 +21,11 @@ import com.cgi_ts.data.TimeSheet;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
+/**
+ * These tests are applied to a running web server which allows some of the 
+ * serialization aspect to be tests (i.e. default JSON objects).
+ *
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class LiveTest {
