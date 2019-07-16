@@ -40,7 +40,7 @@ public class TimeSheetWebService {
 	 */
 	@RequestMapping(method= RequestMethod.GET)
     public Iterable<TimeSheet> findAll() {
-		logger.info("findAll:");
+		logger.debug("findAll: enter");
         return repo.findAll();
     }
 
@@ -52,17 +52,12 @@ public class TimeSheetWebService {
 	 */
 	@GetMapping("/{id}")
 	public TimeSheet findOne(@PathVariable long id) {
-		logger.info("2.5");
+		logger.debug("findOne: enter");
 		Optional<TimeSheet> optionalTimeSheet = repo.findById(id);
 		if (optionalTimeSheet.isPresent()) {
 			TimeSheet ts = optionalTimeSheet.get();
-			for (TimeSheetDay tsd:ts.getTimeSheetDays()) {
-				logger.info("2.6: tsd["+tsd+"]");				
-			}
-			logger.info("2.6.5");				
 			return optionalTimeSheet.get();
 		}
-		logger.info("2.7");
 		throw new TimesheetNotFoundException("id["+id+"] not found");
 	}
 
@@ -74,7 +69,7 @@ public class TimeSheetWebService {
 	@PostMapping("/{date}")
 	@ResponseStatus(HttpStatus.CREATED)
 	public long create(@PathVariable Timestamp date) {
-		logger.info("create called.");
+		logger.debug("create: enter");
 		TimeSheet timeSheet = new TimeSheet();
 		timeSheet.setStartDate(date);
 		TimeSheet timeSheet2 = repo.save(timeSheet);
@@ -88,6 +83,7 @@ public class TimeSheetWebService {
 	 */
 	@PutMapping("/submit/{sheetId}")
 	public void submit(@PathVariable Long sheetId) {
+		logger.debug("submit: enter with sheetId["+sheetId+"]");
 		TimeSheet timeSheet = repo.findById(sheetId).orElseThrow(TimesheetNotFoundException::new);
 		timeSheet.setSubmitted(true);
 		repo.save(timeSheet);
@@ -101,12 +97,13 @@ public class TimeSheetWebService {
 	 */
 	@PutMapping("/{sheetId}/{amountOfTime}/{dayIndex}")
 	public void updateTimeSheet(@PathVariable long sheetId,@PathVariable int amountOfTime, @PathVariable int dayIndex) {
-		logger.info("1.5");
+		logger.debug("updateTimeSheet: enter with sheetId["+sheetId+"] amountOfTime["+amountOfTime+"] dayIndex["+dayIndex+"]");
     	TimeSheet timeSheet = repo.findById(sheetId).orElseThrow(TimesheetNotFoundException::new);
 		if (dayIndex < 0 || dayIndex > 7) {
 			throw new TimeSheetIndexOutOfRangeException("dayIndex: ["+dayIndex+"] must be 1-7:Monday...Sunday");
 		}
 		
+		// Try to update an existing time sheet day
 		boolean dayIndexFound = false;
 		for (TimeSheetDay timeSheetDay:timeSheet.getTimeSheetDays()) {
 			if (timeSheetDay.getDayOfWeek() == dayIndex) {
@@ -114,11 +111,11 @@ public class TimeSheetWebService {
 				dayIndexFound = true;
 			}
 		}
+		// Create a day if one is not found
 		if (!dayIndexFound) {
 			TimeSheetDay timeSheetDay = new TimeSheetDay();
 			timeSheetDay.setDayOfWeek(dayIndex);
 			timeSheetDay.setMinutes(amountOfTime);
-//			timeSheetDay.setSheetId(sheetId);
 			timeSheet.addTimeSheetDay(timeSheetDay);
 		}
 		
