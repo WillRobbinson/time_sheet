@@ -1,4 +1,4 @@
-package com.cgi_ts.ws;
+package com.cgi_ts.ws.exception;
 
 public class TimesheetNotFoundException extends RuntimeException {
 

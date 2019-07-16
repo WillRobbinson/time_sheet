@@ -1,4 +1,4 @@
-package com.cgi_ts;
+package com.cgi_ts.data;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;

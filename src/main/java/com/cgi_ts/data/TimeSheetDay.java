@@ -1,4 +1,4 @@
-package com.cgi_ts;
+package com.cgi_ts.data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

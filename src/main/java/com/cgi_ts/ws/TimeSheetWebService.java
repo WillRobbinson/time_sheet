@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cgi_ts.TimeSheet;
-import com.cgi_ts.TimeSheetDay;
+import com.cgi_ts.data.TimeSheet;
+import com.cgi_ts.data.TimeSheetDay;
 import com.cgi_ts.store.TimeSheetRepository;
+import com.cgi_ts.ws.exception.TimeSheetIndexOutOfRangeException;
+import com.cgi_ts.ws.exception.TimesheetNotFoundException;
 
 /**
  * This REST web service provide limited and specific access to a TimeSheet repository.

@@ -16,8 +16,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.cgi_ts.TimeSheet;
-import com.cgi_ts.TimeSheetDay;
+import com.cgi_ts.data.TimeSheet;
+import com.cgi_ts.data.TimeSheetDay;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest

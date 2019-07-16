@@ -16,6 +16,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.cgi_ts.data.TimeSheet;
+
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
